@@ -12,11 +12,10 @@
 <script>
 export default {
     name: 'CostList',
-    props: {
-        data: {
-            type: Array,
-            default: []
-        },
+    computed: {
+        data() {
+            return this.$store.getters.getList
+        }
     },
     methods: {
 

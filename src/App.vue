@@ -1,8 +1,9 @@
 <template>
-  <div v-if="this.load" id="app">
-    <CostList :data="list"></CostList>
+  <div id="app">
+    <CostList></CostList>
     <button v-if="!toggleForm" v-on:click="toggleForm = !toggleForm">ADD</button>
-    <CostForm v-if="toggleForm" v-on:add="addNewCost"></CostForm>
+    <CostForm v-if="toggleForm" v-on:toggle="toggleForm = !toggleForm">
+    </CostForm>
   </div>
 </template>
 
@@ -18,31 +19,13 @@ export default {
   },
   data() {
     return {
-      list: [],
       toggleForm: false,
-      load: false
-    }
-  },
-  methods: {
-
-    addNewCost(date, category, value) {
-      this.list.push({ number: this.list[this.list.length - 1].number + 1, date, category, value });
-      this.toggleForm = !this.toggleForm
     }
   },
 
-  created() {
-    setTimeout(() => {
-      this.list = [
-        { number: '#', date: 'Date', category: 'Category', value: 'Value' },
-        { number: 1, date: '01.01.2000', category: 'Food', value: '50' },
-        { number: 2, date: '02.01.2000', category: 'Transport', value: '100' },
-        { number: 3, date: '03.01.2000', category: 'Clothing', value: '200' }
-      ];
-      this.load = true;
-    }
-      , 500);
-  }
+  /* created() {
+    setTimeout(() => this.$store.dispatch('start', this.$store.getters.getStartList), 500);
+  } */
 }
 </script>
 
@@ -61,7 +44,7 @@ button {
   margin-top: 10px;
   width: 100px;
   height: 30px;
-  border: none;
+  border: 1px solid rgb(18, 149, 147);
   color: white;
   background-color: rgb(18, 149, 147);
 }
